@@ -1,0 +1,34 @@
+{% extends "loginportal.html" %}
+
+{% block title %}
+  Seller Register Portal
+{% endblock %}
+
+{% block route %}
+  "sellerregister"
+{% endblock %}
+
+{% block form %}
+  <div class="col-sm-7 col-md-5 text-center  login ">
+    <form action="{{ url_for('sellerregister') }}" method = "post">
+      <p>Username</p>
+      <p>
+        <input type="text" name = "username" placeholder = "Enter Username" required>
+      </p>
+      {% if not is_new_user %}
+        <p class="dander">Username aldready exists.</p>
+      {% endif %}
+      <p>Password</p>
+      <p>
+      <input type="password" name = "password" placeholder = "Enter Password" required>
+    </p>
+      <p>Confirm Password</p>
+      <input type="password" name="confirm_password" placeholder="Confirm password">
+      {% if not password_match  %}
+        <p class="danger">Passwords dont match.</p>
+      {% endif %}
+      <button class = "btn btn-primary btn-block">Register</button>
+    </form>
+    <p>Aldready have an account. <a href="{{ url_for('seller') }}">Login</a> instead.</p>
+  </div>
+{% endblock %}

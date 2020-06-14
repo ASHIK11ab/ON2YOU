@@ -1,13 +1,13 @@
 {% extends "loginportal.html" %}
 
 {% block title %}
-  Seller Login Portal
+  Customer Login Portal
 {% endblock %}
 
 {% block form %}
-  <div class="col-sm-7 col-md-5 login">
+  <div class="col-sm-7 col-md-5 mt-5 login">
     <h3 class="text-center">Sign In</h3><br><hr>
-    <form action="{{ url_for('sellerlogin') }}" method = "post">
+    <form action="{{ url_for('customerlogin') }}" method = "post">
       <div class="form-group">
         <p>Username</p>
         <p>
@@ -25,6 +25,6 @@
       {% endif %}
       <button class = "btn btn-primary btn-block mt-2">Log in</button>
     </form>
-    <p>Dont have an account. <a href="{{ url_for('sellernew') }}">Register</a> instead.</p>
+    <p>Dont have an account. <a href="{{ url_for('customernew') }}">Register</a> instead.</p>
   </div>
 {% endblock %}

@@ -1,13 +1,13 @@
 {% extends "loginportal.html" %}
 
 {% block title %}
-  Seller Register Portal
+  Customer Register Portal
 {% endblock %}
 
 {% block form %}
-  <div class="col-sm-7 col-md-5  login ">
+  <div class="col-sm-7 col-md-5 login ">
     <h3 class="text-center">Register</h3><br><hr>
-    <form action="{{ url_for('sellerregister') }}" method = "post">
+    <form action="{{ url_for('customerregister') }}" method = "post">
       <div class="form-group">
         <p>Username</p>
         <p>
@@ -34,6 +34,6 @@
       {% endif %}
       <button class = "btn btn-primary btn-block mt-2">Register</button>
     </form>
-    <p>Aldready have an account. <a href="{{ url_for('seller') }}">Login</a> instead.</p>
+    <p>Aldready have an account. <a href="{{ url_for('customer') }}">Login</a> instead.</p>
   </div>
 {% endblock %}

@@ -13,12 +13,13 @@
     <div class="login col-sm-7 col-md-5 text-center">
       <h1>ON2YOU</h1>
       <h3>One Stop For All</h3>
+      <hr>
       <div class="row mt-5">
         <div class="col">
             <a type="button"  class="btn btn-primary btn-block" href="{{ url_for('seller') }}">Seller</a>
         </div>
         <div class="col">
-          <a type="button"  class="btn btn-info btn-block" href="#">Customer</a>
+          <a type="button"  class="btn btn-info btn-block" href="{{ url_for('customer') }}">Customer</a>
         </div>
       </div>
     </div>

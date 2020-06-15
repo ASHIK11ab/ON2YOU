@@ -14,10 +14,23 @@ class customer:
     def getpassword(self):
         return self.password
 
+class products:
+    def getusername(self):
+            return self.username
+
+    def getitem_name(self):
+        return self.item_name
+
+    def getcategory(self):
+        return self.category
+
+    def getcost(self):
+        return self.cost
+
 def existingseller(name,password):
         obj = seller()
         is_existing = False
-        with open("seller.pkl", "r+b") as file:
+        with open("database/seller.pkl", "r+b") as file:
             while True:
                 try:
                     obj = pickle.load(file)
@@ -34,7 +47,7 @@ def existingseller(name,password):
 def newseller(name, password):
         obj = seller()
         is_new = True
-        with open("seller.pkl", "rb") as file:
+        with open("database/seller.pkl", "rb") as file:
             while True:
                 try:
                     obj = pickle.load(file)
@@ -54,7 +67,7 @@ def newseller(name, password):
 def existingcustomer(name,password):
         obj = customer()
         is_existing = False
-        with open("customer.pkl", "r+b") as file:
+        with open("database/customer.pkl", "r+b") as file:
             while True:
                 try:
                     obj = pickle.load(file)
@@ -71,7 +84,7 @@ def existingcustomer(name,password):
 def newcustomer(name, password):
         obj =customer()
         is_new = True
-        with open("customer.pkl", "rb") as file:
+        with open("database/customer.pkl", "rb") as file:
             while True:
                 try:
                     obj = pickle.load(file)
@@ -87,3 +100,31 @@ def newcustomer(name, password):
                 object.password = password
                 pickle.dump(object, f)
         return is_new
+
+def update_database(myproducts, username):
+    obj = products()
+    with open('database/products.pkl', "a+b") as file:
+        obj.username = username
+        obj.item_name = myproducts["item_name"]
+        obj.category = myproducts["category"]
+        obj.cost = myproducts["cost"]
+        pickle.dump(obj, file)
+
+def get_all_products(username):
+    cnt = 0
+    results = {}
+    obj = products()
+    with open('database/products.pkl', 'rb') as file:
+        while True:
+            try:
+                obj = pickle.load(file)
+                if obj.getusername() == username:
+                    subresults = {}
+                    cnt+= 1
+                    subresults["item_name"] = obj.getitem_name()
+                    subresults["category"] = obj.getcategory()
+                    subresults["cost"] = obj.getcost()
+                    results[cnt] = subresults
+            except EOFError:
+                break
+    return (results,cnt)

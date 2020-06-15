@@ -1,0 +1,27 @@
+{% extends "dashboard_seller.html" %}
+
+{% block title %}
+  All Products
+{% endblock %}
+
+{% block body %}
+  <div class="container mt-4">
+    <div class="card">
+      <div class="card-header">
+        <p class ="h2">Total Products: {{ total }}</p><hr>
+      </div>
+      {% if total > 0 %}
+        <div class="card-content pre-scrollable mt-2">
+        {% for key in range(1,total+1) %}
+          <div class = "pl-3">
+              <p class="h3">Product #{{ key }}</p>
+              <p>Title: {{ products[key]["item_name"] }}</p>
+              <p>Category: {{ products[key]["category"] }}</p>
+              <p>Cost: {{ products[key]["cost"] }}</p><hr>
+          </div>
+        {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

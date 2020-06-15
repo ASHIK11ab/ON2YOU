@@ -1,6 +1,6 @@
 import pickle
 
-from flask import Flask, render_template, request ,redirect, url_for
+from flask import Flask, render_template, request ,redirect, url_for, flash
 from myfunctions import*
 from myfunctions import seller, customer
 
@@ -24,7 +24,7 @@ def sellerlogin():
     password = request.form.get("password")
     access_granted = existingseller(username, password)
     if access_granted:
-        return redirect(url_for('dashboard_seller'))
+        return render_template('dashboard_seller.html', username = username)
     else:
         return render_template('sellerlogin.html', access_granted = access_granted)
 
@@ -39,7 +39,7 @@ def sellerregister():
         password_match = True
     is_new_user = newseller(username, password)
     if is_new_user and password_match:
-        return redirect(url_for('dashboard_seller'))
+        return render_template('dashboard_seller.html' ,username = username)
     else:
         return render_template('sellerregister.html', is_new_user = is_new_user, password_match = password_match)
 
@@ -57,7 +57,7 @@ def customerlogin():
     password = request.form.get("password")
     access_granted = existingcustomer(username, password)
     if access_granted:
-        return redirect(url_for('dashboard_customer'))
+        return render_template('dashboard_customer.html', username = username)
     else:
         return render_template('customerlogin.html', access_granted = access_granted)
 
@@ -72,14 +72,28 @@ def customerregister():
         password_match = True
     is_new_user = newcustomer(username, password)
     if is_new_user and password_match:
-        return redirect(url_for('dashboard_customer'))
+        return render_template('dashboard_customer.html', username = username)
     else:
         return render_template('customerregister.html', is_new_user = is_new_user, password_match = password_match)
 
-@app.route('/dashboard_seller')
-def dashboard_seller():
-    return render_template('dashboard_seller.html')
+@app.route('/add_item_render')
+def add_item_render():
+    username = request.args.get('username')
+    return render_template('add_item.html', username = username, is_success = False)
 
-@app.route('/dashboard_customer')
-def dashboard_customer():
-    return render_template('dashboard_customer.html')
+@app.route('/dashboard_seller/add_item', methods = ["POST"])
+def add_item():
+    products = {}
+    products["item_name"] = request.form.get('item_name')
+    products["category"] = request.form.get('category')
+    products["cost"] = request.form.get('cost')
+    username = request.args.get('username')
+    update_database(products,username)
+    return render_template('add_item.html', username = username, is_success = True)
+
+@app.route('/dashboard_seller/all_products')
+def all_products():
+    products = {}
+    username = request.args.get('username')
+    products ,total = get_all_products(username)
+    return render_template('all_products.html', products = products, total = total)

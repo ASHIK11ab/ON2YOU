@@ -35,13 +35,14 @@ def sellerregister():
     confirm_password = request.form.get("confirm_password")
     if password != confirm_password:
         password_match = False
+        return render_template('sellerregister.html', is_new_user = True, password_match = password_match)
     else:
         password_match = True
-    is_new_user = newseller(username, password)
-    if is_new_user and password_match:
-        return render_template('dashboard_seller.html' ,username = username)
-    else:
-        return render_template('sellerregister.html', is_new_user = is_new_user, password_match = password_match)
+        is_new_user = newseller(username, password)
+        if is_new_user and password_match:
+            return render_template('dashboard_seller.html' ,username = username)
+        else:
+            return render_template('sellerregister.html', is_new_user = is_new_user, password_match = password_match)
 
 @app.route('/customer')      #to redirect to login portal
 def customer():
@@ -68,13 +69,14 @@ def customerregister():
     confirm_password = request.form.get("confirm_password")
     if password != confirm_password:
         password_match = False
+        return render_template('customerregister.html', is_new_user = True, password_match = password_match)
     else:
         password_match = True
-    is_new_user = newcustomer(username, password)
-    if is_new_user and password_match:
-        return render_template('dashboard_customer.html', username = username)
-    else:
-        return render_template('customerregister.html', is_new_user = is_new_user, password_match = password_match)
+        is_new_user = newcustomer(username, password)
+        if is_new_user and password_match:
+            return render_template('dashboard_customer.html', username = username)
+        else:
+            return render_template('customerregister.html', is_new_user = is_new_user, password_match = password_match)
 
 @app.route('/add_item_render')
 def add_item_render():
@@ -96,4 +98,4 @@ def all_products():
     products = {}
     username = request.args.get('username')
     products ,total = get_all_products(username)
-    return render_template('all_products.html', products = products, total = total)
+    return render_template('all_products.html', products = products, total = total, username= username)

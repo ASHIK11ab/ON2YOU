@@ -6,7 +6,59 @@ transform:translate(-50%,-50%);
 border: 1px solid black;
 padding:10px;
 }
+
 input{
   position:relative;
   width:100%;
+}
+
+.error_display{
+  border: 2px solid red;
+}
+
+.myalert{
+  animation-name:myalert;
+  animation-iteration-count:2;
+  animation-duration:2s;
+  text-align: center;
+}
+
+@keyframes{
+  0%{
+    position:absolute;
+    top:-30px;
+    left:40%;
+  }
+
+  25%{
+    position:absolute;
+    top:80px;
+    left:40%;
+    width:60%;
+    height:60px;
+  }
+
+  50%{
+    position:absolute;
+    top:80px;
+    left:40%;
+    width:65%;
+    height:70px;
+  }
+
+  75%{
+    position:absolute;
+    top:80px;
+    left:40%;
+    width:60%;
+    height:60px;
+  }
+
+  100%{
+    position:absolute;
+    top:80px;
+    left:40%;
+    width:65%;
+    height:70px;
+  }
 }

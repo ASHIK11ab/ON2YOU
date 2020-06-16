@@ -16,13 +16,15 @@
       </div>
       <div class="form-group">
         <p>Password</p>
-        <p>
-        <input type="password" name = "password" placeholder = "Enter Password" required>
-        </p>
+        {% if not access_granted %}
+          <p>
+          <input type="password" class="error_display" name = "password" placeholder = "Enter Password" required>
+          </p>
+          <p class="text-danger">Invalid Username or Password</p>
+        {% else %}
+          <input type="password" name = "password" placeholder = "Enter Password" required>
+        {% endif %}
       </div>
-      {% if not access_granted %}
-        <p class="text-danger">Invalid Username or Password</p>
-      {% endif %}
       <button class = "btn btn-primary btn-block mt-2">Log in</button>
     </form>
     <p>Dont have an account. <a href="{{ url_for('sellernew') }}">Register</a> instead.</p>

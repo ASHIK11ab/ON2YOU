@@ -30,7 +30,7 @@ class products:
 def existingseller(name,password):
         obj = seller()
         is_existing = False
-        with open("database/seller.pkl", "r+b") as file:
+        with open("database/seller.pkl", "rb") as file:
             while True:
                 try:
                     obj = pickle.load(file)
@@ -57,7 +57,7 @@ def newseller(name, password):
                 except EOFError:
                     break
         if is_new:  #if new user add this seller to database 'seller.pkl'
-            with open("seller.pkl", "a+b") as f:
+            with open("database/seller.pkl", "a+b") as f:
                 object = seller()
                 object.username = name
                 object.password = password
@@ -94,7 +94,7 @@ def newcustomer(name, password):
                 except EOFError:
                     break
         if is_new:  #if new user add this seller to database 'seller.pkl'
-            with open("customer.pkl", "a+b") as f:
+            with open("database/customer.pkl", "a+b") as f:
                 object = customer()
                 object.username = name
                 object.password = password

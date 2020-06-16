@@ -13,7 +13,7 @@ class customer:
         return self.password
 
 def s():
-    with open("seller.pkl", "rb") as f:
+    with open("database/seller.pkl", "rb") as f:
         data = seller()
         while True:
                 try:
@@ -23,7 +23,7 @@ def s():
                     break
 
 def c():
-    with open("customer.pkl", "rb") as f:
+    with open("database/customer.pkl", "rb") as f:
         data = customer()
         while True:
                 try:

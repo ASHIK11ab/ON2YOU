@@ -6,11 +6,10 @@
 
 {% block body %}
   {% if is_success %}
-    <div class="alert alert-success myalert">
+    <span class="alert alert-success myalert">
       Item added successfully.
-    </div>
+    </span>
   {% endif %}
-  <p class="h1">{{ username }}</p>
   <div class="login col-sm-7 col-md-5">
     <h3 class="text-center mt-3">Add Item</h3><br><hr>
     <form action="{{ url_for('add_item', username = username) }}" method = "post">

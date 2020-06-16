@@ -24,7 +24,7 @@ def sellerlogin():
     password = request.form.get("password")
     access_granted = existingseller(username, password)
     if access_granted:
-        return render_template('dashboard_seller.html', username = username)
+        return redirect(url_for('recent_product', username = username, register = False))
     else:
         return render_template('sellerlogin.html', access_granted = access_granted)
 
@@ -40,7 +40,7 @@ def sellerregister():
         password_match = True
         is_new_user = newseller(username, password)
         if is_new_user and password_match:
-            return render_template('dashboard_seller.html' ,username = username)
+            return redirect(url_for('recent_product', username = username, register = True))
         else:
             return render_template('sellerregister.html', is_new_user = is_new_user, password_match = password_match)
 
@@ -74,7 +74,7 @@ def customerregister():
         password_match = True
         is_new_user = newcustomer(username, password)
         if is_new_user and password_match:
-            return render_template('dashboard_customer.html', username = username)
+            pass
         else:
             return render_template('customerregister.html', is_new_user = is_new_user, password_match = password_match)
 
@@ -82,6 +82,13 @@ def customerregister():
 def add_item_render():
     username = request.args.get('username')
     return render_template('add_item.html', username = username, is_success = False)
+
+@app.route('/dashboard_seller')
+def recent_product():
+    username = request.args.get('username')
+    register = request.args.get('register')
+    recent, count = recentproduct(username)
+    return render_template("recent_product.html", username = username, register = register, count = count, recent = recent)
 
 @app.route('/dashboard_seller/add_item', methods = ["POST"])
 def add_item():

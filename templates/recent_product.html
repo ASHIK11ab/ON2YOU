@@ -1,0 +1,24 @@
+{% extends "dashboard_seller.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+{% block body %}
+  <div class="container mt-4">
+    <div class="card">
+      {% if count != 0 %}
+        <div class="card-header">
+          <h2 class ="">Recent product:</h2>
+        </div>
+        <div class="card-content pl-3 mt-3">
+          <p>Title: {{ recent["item_name"] }}</p>
+          <p>Category: {{ recent["category"] }}</p>
+          <p>Cost: {{ recent["cost"] }}</p>
+        </div>
+      {% else %}
+        <div class="card-header">
+          <h2 class ="pl-3">Recent product: None</h2>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

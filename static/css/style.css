@@ -11,42 +11,46 @@ input {
   width: 100%; }
 
 .error_display {
-  border: 2px solid red; }
+  border: 1px solid red; }
 
 .myalert {
   animation-name: myalert;
-  animation-iteration-count: 2;
-  animation-duration: 2s;
-  text-align: center; }
+  animation-iteration-count: 1;
+  animation-duration: 6s;
+  text-align: center;
+  animation-fill-mode: forwards; }
 
-@keyframes {
+@keyframes myalert {
   0% {
     position: absolute;
     top: -30px;
     left: 40%; }
   25% {
     position: absolute;
-    top: 80px;
+    top: 20px;
     left: 40%;
-    width: 60%;
-    height: 60px; }
+    width: 30%;
+    height: 30px;
+    border: lightgreen; }
   50% {
     position: absolute;
-    top: 80px;
+    top: 20px;
     left: 40%;
-    width: 65%;
-    height: 70px; }
+    width: 35%;
+    height: 35px;
+    border: lightgreen; }
   75% {
     position: absolute;
-    top: 80px;
+    top: 20px;
     left: 40%;
-    width: 60%;
-    height: 60px; }
+    width: 30%;
+    height: 30px;
+    border: lightgreen; }
   100% {
     position: absolute;
-    top: 80px;
+    top: -30px;
     left: 40%;
-    width: 65%;
-    height: 70px; } }
+    width: 55%;
+    height: 35px; } }
 
 /*# sourceMappingURL=style.css.map */

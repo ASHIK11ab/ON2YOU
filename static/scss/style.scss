@@ -10,6 +10,11 @@ padding:10px;
 input{
   position:relative;
   width:100%;
+  border-radius:5px;
+}
+
+p{
+  font-size:18px;
 }
 
 .error_display{
@@ -22,12 +27,13 @@ input{
   animation-duration:6s;
   text-align: center;
   animation-fill-mode: forwards;
+  padding:5px;
 }
 
 @keyframes myalert{
   0%{
     position:absolute;
-    top:-30px;
+    top:-60px;
     left:40%;
   }
 
@@ -35,8 +41,8 @@ input{
     position:absolute;
     top:20px;
     left:40%;
-    width:30%;
     height:30px;
+    color:white;
     border: lightgreen;
   }
 
@@ -44,8 +50,8 @@ input{
     position:absolute;
     top:20px;
     left:40%;
-    width:35%;
-    height:35px;
+    height:45px;
+    color:black;
     border: lightgreen;
   }
 
@@ -53,16 +59,16 @@ input{
     position:absolute;
     top:20px;
     left:40%;
-    width:30%;
-    height:30px;
+    height:40px;
+    color:white;
     border: lightgreen;
   }
 
   100%{
     position:absolute;
-    top:-30px;
+    top:-60px;
     left:40%;
-    width:55%;
-    height:35px;
+    color:black;
+    height:45px;
   }
 }

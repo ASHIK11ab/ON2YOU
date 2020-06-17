@@ -44,40 +44,6 @@ def sellerregister():
         else:
             return render_template('sellerregister.html', is_new_user = is_new_user, password_match = password_match)
 
-@app.route('/customer')      #to redirect to login portal
-def customer():
-    return render_template('customerlogin.html', access_granted = True)
-
-@app.route('/customernew') #to redirect to register portal
-def customernew():
-    return render_template('customerregister.html', is_new_user = True, password_match = True)
-
-@app.route('/customerlogin', methods = ["POST"])
-def customerlogin():
-    username = request.form.get("username")
-    password = request.form.get("password")
-    access_granted = existingcustomer(username, password)
-    if access_granted:
-        return render_template('dashboard_customer.html', username = username)
-    else:
-        return render_template('customerlogin.html', access_granted = access_granted)
-
-@app.route('/customerregister', methods = ["POST"])
-def customerregister():
-    username = request.form.get("username")
-    password = request.form.get("password")
-    confirm_password = request.form.get("confirm_password")
-    if password != confirm_password:
-        password_match = False
-        return render_template('customerregister.html', is_new_user = True, password_match = password_match)
-    else:
-        password_match = True
-        is_new_user = newcustomer(username, password)
-        if is_new_user and password_match:
-            pass
-        else:
-            return render_template('customerregister.html', is_new_user = is_new_user, password_match = password_match)
-
 @app.route('/add_item_render')
 def add_item_render():
     username = request.args.get('username')
@@ -106,3 +72,51 @@ def all_products():
     username = request.args.get('username')
     products ,total = get_all_products(username)
     return render_template('all_products.html', products = products, total = total, username= username)
+
+@app.route('/customer')      #to redirect to login portal
+def customer():
+    return render_template('customerlogin.html', access_granted = True)
+
+@app.route('/customernew') #to redirect to register portal
+def customernew():
+    return render_template('customerregister.html', is_new_user = True, password_match = True)
+
+@app.route('/customerlogin', methods = ["POST"])
+def customerlogin():
+    username = request.form.get("username")
+    password = request.form.get("password")
+    access_granted = existingcustomer(username, password)
+    if access_granted:
+        return redirect(url_for('recent_products_customer', username = username))
+    else:
+        return render_template('customerlogin.html', access_granted = access_granted)
+
+@app.route('/customerregister', methods = ["POST"])
+def customerregister():
+    username = request.form.get("username")
+    password = request.form.get("password")
+    confirm_password = request.form.get("confirm_password")
+    if password != confirm_password:
+        password_match = False
+        return render_template('customerregister.html', is_new_user = True, password_match = password_match)
+    else:
+        password_match = True
+        is_new_user = newcustomer(username, password)
+        if is_new_user and password_match:
+            return redirect(url_for('recent_products_customer', username = username))
+        else:
+            return render_template('customerregister.html', is_new_user = is_new_user, password_match = password_match)
+
+@app.route('/dashboard_customer')
+def recent_products_customer():
+    username = request.args.get('username')
+    results, total = recent_products_find()
+    return render_template('recent_products_customer.html', products = results, total = total, username = username)
+
+@app.route('/purchase_tentative')
+def purchase_tentative():
+    return "Purchase"
+
+@app.route('/add_to_cart')
+def add_to_cart():
+    return "Added to cart"

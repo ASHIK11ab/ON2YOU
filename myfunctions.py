@@ -145,3 +145,22 @@ def recentproduct(username):
             except EOFError:
                 break
     return (recent, cnt)
+
+def recent_products_find():
+    cnt = 0
+    results = {}
+    obj = products()
+    with open('database/products.pkl', 'rb') as file:
+        while True:
+            try:
+                obj = pickle.load(file)
+                subresults = {}
+                cnt+= 1
+                subresults["seller_name"] = obj.getusername()
+                subresults["item_name"] = obj.getitem_name()
+                subresults["category"] = obj.getcategory()
+                subresults["cost"] = obj.getcost()
+                results[cnt] = subresults
+            except EOFError:
+                break
+    return (results,cnt)

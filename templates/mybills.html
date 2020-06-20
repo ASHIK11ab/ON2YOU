@@ -1,0 +1,25 @@
+{% extends "dashboard_customer.html" %}
+
+{% block title %}
+  My Bills
+{% endblock %}
+
+{% block body %}
+  <div class="container mt-3">
+    <p class="h2 pl-3 ">Your Bills:</p>
+    <div class="card">
+      <div class="card-header">
+        <h3 >No of bills: {{cnt}}</h3>
+      </div>
+      <div class="card-content mt-3">
+        <ol>
+          {% for bill_id in bills %}
+            <li>
+              <a href="{{url_for('display_current_bill', bill_id = bill_id, is_nested = is_nested)}}"> #{{ bill_id }}</a>
+            </li><hr>
+          {% endfor %}
+        </ol>
+      </div>
+    </div>
+  </div>
+{% endblock %}

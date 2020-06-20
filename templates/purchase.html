@@ -1,0 +1,36 @@
+{% extends "dashboard_customer.html" %}
+
+{% block title %}
+  Product Purchase
+{% endblock %}
+
+{% block body %}
+  <div class="col-sm-7 col-md-5 mt-3">
+    <div class="card">
+      <div class="card-content pl-3">
+        <p>Item name: {{ product["item_name"] }}</p>
+        <p>Seller name: {{ product["seller_name"] }}</p>
+        <p>Category: {{ product["category"] }}</p>
+        <p>Cost: {{ product["cost"] }}</p>
+        <form action="{{url_for('purchase_tentative', product = product, username = username)}}" method="post">
+          <div class="form-group row justify-content-between">
+            <div class="col-5">
+              <p>Enter Quantity:</p>
+            </div>
+            <div class="col-5">
+              <input type="number"  name="quantity" placeholder="Enter quantity" required>
+            </div>
+          </div>
+          <div class="row justify-content-around">
+            <div class="col-7">
+              <button  type="submit" class ="btn btn-primary btn-block">Procced to Purchase.</button>
+            </div>
+            <div class="col-4">
+              <button href="{{ url_for('recent_products_customer', username = username )}}  " class ="btn btn-warning btn-block">Cancel.</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock%}

@@ -28,34 +28,33 @@ p {
 @keyframes myalert {
   0% {
     position: absolute;
-    top: -60px;
+    top: -40%;
     left: 40%; }
+  12% {
+    position: absolute;
+    top: 10px;
+    left: 40%;
+    border: lightgreen; }
   25% {
     position: absolute;
-    top: 20px;
+    top: 10px;
     left: 40%;
-    height: 30px;
-    color: white;
     border: lightgreen; }
   50% {
     position: absolute;
-    top: 20px;
+    top: 10px;
     left: 40%;
-    height: 45px;
-    color: black;
     border: lightgreen; }
   75% {
     position: absolute;
-    top: 20px;
+    top: 10px;
     left: 40%;
-    height: 40px;
-    color: white;
     border: lightgreen; }
   100% {
     position: absolute;
-    top: -60px;
-    left: 40%;
-    color: black;
-    height: 45px; } }
+    top: -40%;
+    left: 40%; } }
+.cursor {
+  cursor: pointer; }
 
 /*# sourceMappingURL=style.css.map */

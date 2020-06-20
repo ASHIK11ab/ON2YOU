@@ -5,10 +5,25 @@
 {% endblock %}
 
 {% block body %}
-  <div class="container">
+  {% if is_message == "True" %}
+    {% if message == "buy" %}
+      <span class="alert alert-success myalert">
+        <p>Purchase successfull.</p>
+        <p><small>Check your bills at <a href="{{ url_for('mybills', username = username) }}">My Bills</a></small></p>
+      </span>
+    {% else %}
+      <div class="alert alert-success myalert">
+        <p class="alert-header">
+          Added to cart successfully.
+          <br><small>Check your cart at <a href="#">My Cart</a></small>
+        </p>
+      </div>
+    {% endif %}
+  {% endif %}
+  <div class="container mt-5">
     <div class="card mt-3">
       <div class="card-header">
-        <p class="ml-3">Recent Products For You:</p>
+        <p class="ml-3">Recommended Products For You:</p>
       </div>
       <div class="card-content">
         {% if total != 0 %}
@@ -19,12 +34,12 @@
                     <div class="card-header pl-3">
                       <p>Title: {{ products[key]["item_name"] }}</p>
                     </div>
-                    <p class="pl-3" >Seller: {{ products[key]["username"] }}</p>
+                    <p class="pl-3" >Seller: {{ products[key]["seller_name"] }}</p>
                     <p class="pl-3" >Category: {{ products[key]["category"] }}</p>
                     <p class="pl-3" >Cost: {{ products[key]["cost"] }}</p>
                     <div class="row justify-content-around">
                       <div class="col-5">
-                        <a type="button" class="btn btn-outline-success" href="{{ url_for('purchase_tentative', item=products[key]) }}">
+                        <a type="button" class="btn btn-outline-success" href="{{ url_for('purchase', product = products[key], username = username) }}">
                           Buy Now</a>
                       </div>
                       <div class="col-5">
@@ -35,12 +50,12 @@
                 </div>
             {% endfor %}
           {% else %}
-            {% for key in range(total, 1, -1) %}
+            {% for key in range(total, 0, -1) %}
                 <div class = "col-sm-5 mt-4 col-xs-8">
                     <div class="card-header pl-3">
                       <p>Title: {{ products[key]["item_name"] }}</p>
                     </div>
-                    <p class="pl-3" >Seller: {{ products[key]["username"] }}</p>
+                    <p class="pl-3" >Seller: {{ products[key]["seller_name"] }}</p>
                     <p class="pl-3" >Category: {{ products[key]["category"] }}</p>
                     <p class="pl-3" >Cost: {{ products[key]["cost"] }}</p>
                     <div class="row justify-content-around">

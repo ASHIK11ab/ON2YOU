@@ -1,4 +1,4 @@
-import pickle
+import pickle, datetime, random
 
 class seller:
     def getusername(self):
@@ -164,3 +164,62 @@ def recent_products_find():
             except EOFError:
                 break
     return (results,cnt)
+
+def generateid():
+    id = random.randrange(1,100000)
+    return id
+
+def generatebill(product):
+    product["date"] = datetime.datetime.now()
+    flag = 0
+    cnt = 0
+    with open("database/id.pkl","rb") as file:
+        existing_ids = []
+        while True:
+            try:
+                existing_ids = pickle.load(file)
+                cnt+=1
+                while True:
+                    id = generateid()
+                    print("id is: ",id)
+                    if id not in existing_ids:
+                        product["bill_id"] = id
+                        existing_ids.append(id)
+                        flag = 1
+                        break
+            except EOFError:
+                 break
+    if cnt == 0:
+        id = generateid()
+        product["bill_id"] = id
+        existing_ids.append(id)
+        flag = 1
+        print("id is: ",id)
+
+    if flag == 1:
+        with open('database/id.pkl',"wb") as file:
+            pickle.dump(existing_ids,file)
+
+        with open('database/bill.pkl',"ab") as file:
+            pickle.dump(product, file)
+
+def getmybill_ids(username):
+    with open("database/bill.pkl","rb") as file:
+        id = []
+        cnt = 0
+        is_nested = False
+        while True:
+            try:
+                data = pickle.load(file)
+                try:
+                    if data["1"]["customer_name"] == username:
+                        id.append(data["bill_id"])
+                        cnt+=1
+                        is_nested = True
+                except KeyError:
+                    if data["customer_name"] == username:
+                        id.append(data["bill_id"])
+                        cnt+=1
+            except EOFError:
+                break
+    return id, cnt, is_nested

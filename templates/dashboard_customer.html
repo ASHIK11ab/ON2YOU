@@ -17,18 +17,19 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-item nav-link active" href="{{ url_for('recent_products_customer', username = username) }}">Dashboard<span class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link active" href="{{ url_for('recent_products_customer', username = username, is_message=False, message ='none') }}">Dashboard<span class="sr-only">(current)</span></a>
           <a class="nav-item nav-link active" href="#">Search <span class="sr-only">(current)</span></a>
           <a class="nav-item nav-link active" href="#">My Cart</a>
             <!-- Default dropright button -->
             <div class=" mt-2 pl-md-2 dropdown">
-              <a  class=" dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a  class=" dropdown-toggle cursor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 My Account
               </a>
-              <div class="dropdown-menu col-sm-3 col-md-3">
+              <div class="dropdown-menu ">
                 <!-- Dropdown menu links -->
                 <div>
                   <a  class="dropdown-item" href="#">Username: {{ username }}</a>
+                  <hr><a class="dropdown-item" href="{{ url_for('mybills', username = username) }}">My Bill</a>
                   <hr><a class="dropdown-item" href="{{ url_for('index') }}">Logout</a>
                 </div>
               </div>

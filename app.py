@@ -3,6 +3,7 @@ import pickle
 from flask import Flask, render_template, request ,redirect, url_for, flash
 from myfunctions import*
 from myfunctions import seller, customer
+from jinja2.nativetypes import NativeEnvironment
 
 app= Flask(__name__)
 
@@ -87,7 +88,7 @@ def customerlogin():
     password = request.form.get("password")
     access_granted = existingcustomer(username, password)
     if access_granted:
-        return redirect(url_for('recent_products_customer', username = username))
+        return redirect(url_for('recent_products_customer', message="none", is_message = False, username = username))
     else:
         return render_template('customerlogin.html', access_granted = access_granted)
 
@@ -103,19 +104,62 @@ def customerregister():
         password_match = True
         is_new_user = newcustomer(username, password)
         if is_new_user and password_match:
-            return redirect(url_for('recent_products_customer', username = username))
+            return redirect(url_for('recent_products_customer',message="none", username = username, is_message = False))
         else:
             return render_template('customerregister.html', is_new_user = is_new_user, password_match = password_match)
 
 @app.route('/dashboard_customer')
 def recent_products_customer():
+    is_message = request.args.get('is_message')
+    message = request.args.get('message')
     username = request.args.get('username')
     results, total = recent_products_find()
-    return render_template('recent_products_customer.html', products = results, total = total, username = username)
+    return render_template('recent_products_customer.html', products = results, total = total, username = username, is_message = is_message , message = message)
 
-@app.route('/purchase_tentative')
+@app.route('/purchase')
+def purchase():
+    product = request.args.get('product')
+    e = NativeEnvironment()
+    t = e.from_string(product)
+    product = t.render()
+    username = request.args.get('username')
+    return render_template('purchase.html', product = product, username = username)
+
+@app.route('/Purchase/Purchase_tentative', methods=["POST"])
 def purchase_tentative():
-    return "Purchase"
+    username = request.args.get('username')
+    product = request.args.get('product')
+    qty = request.form.get('quantity')
+    e = NativeEnvironment()
+    t = e.from_string(product)
+    product = t.render()
+    product["total_cost"] = int(product["cost"])*int(qty)
+    product["quantity"] = qty
+    return render_template('purchase_confirmation.html', product = product, username = username)
+
+@app.route('/Purchase/Purchase_Confirmation')
+def purchase_confirmation():
+    username = request.args.get('username')
+    product = request.args.get('product')
+    e = NativeEnvironment()
+    t = e.from_string(product)
+    product = t.render()
+    product["customer_name"] = request.args.get('username')
+    generatebill(product)
+    return redirect(url_for('recent_products_customer',is_message = True, message = "buy", username = username))
+
+@app.route('/My_Bills')
+def mybills():
+    username = request.args.get('username')
+    bills, cnt , is_nested = getmybill_ids(username)
+    return render_template('mybills.html', bills = bills, cnt = cnt, username = username, is_nested = is_nested)
+
+@app.route('/My_bills/Current_Bill')
+def display_current_bill():
+    bill_id = request.args.get('bill_id')
+    is_nested = request.args.get('is_nested')
+    bill = get_this_bill(bill_id)
+    return render_template('current_bill.html', bill = bill, is_nested = is_nested)
 
 @app.route('/add_to_cart')
 def add_to_cart():

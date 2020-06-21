@@ -7,17 +7,75 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-    <title>Your Bill</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/style.css') }}">
+    <title>Bill #{{ bill["bill_id"] }}</title>
   </head>
   <body>
-    <div class="container">
+    <div class="container login">
       <div class="card">
         <div class="card-header">
-          <p>Bill No: {{bill["bill_id"]}} </p>
-          <div class="card-content">
-              {{bill}}
-          </div>
+          <h2>Bill No: {{ bill["bill_id"] }} </h2>
+        </div>
+        <div class="card-content pl-3">
+          {% if is_nested == "True" %}
+            <p>
+              Customer Name: <span class="float-right mr-3">{{ bill[0]["customer_name"] }}</span>
+            </p><hr>
+            <p>
+              Date: <span class="float-right mr-3">{{ bill["date"] }}</span>
+            </p><hr>
+            {% for key in range(total_no) %}
+              <p>
+                Item Name: <span class="float-right-mr-3">{{ bill[key]["item_name"] }}</span>
+              </p><hr>
+              <p>
+                Seller Name: <span class="float-right mr-3">{{ bill[key]["seller_name"] }}</span>
+              </p><hr>
+              <p>
+                Category: <span class="float-right mr-3">{{ bill[key]["category"] }}</span>
+              </p><hr>
+              <p>
+                Cost: <span class="float-right mr-3">{{ bill[key]["cost"] }}</span>
+              </p><hr>
+              <p>
+                Quantity: <span class="float-right mr-3">{{ bill[key]["quantity"] }}</span>
+              </p><hr>
+            {% endfor %}
+            <p>
+              Total Cost: <span class="float-right mr-3">{{ bill["total_cost"] }}</span>
+            </p><hr>
+            <p>
+              Staus: <span class="float-right mr-3">Paid</span>
+            </p>
+          {% else %}
+            <p>
+              Customer Name: <span class="float-right mr-3">{{ bill["customer_name"] }}</span>
+            </p><hr>
+            <p>
+              Date: <span class="float-right mr-3">{{ bill["date"] }}</span>
+            </p><hr>
+            <p>
+              Item Name: <span class="float-right mr-3">{{ bill["item_name"] }}</span>
+            </p><hr>
+            <p>
+              Seller Name: <span class="float-right mr-3">{{ bill["seller_name"] }}</span>
+            </p><hr>
+            <p>
+              Category: <span class="float-right mr-3">{{ bill["category"] }}</span>
+            </p><hr>
+            <p>
+              Cost: <span class="float-right mr-3">{{ bill["cost"] }}</span>
+            </p><hr>
+            <p>
+              Quantity: <span class="float-right mr-3">{{ bill["quantity"] }}</span>
+            </p><hr>
+            <p>
+              Total Cost: <span class="float-right mr-3">{{ bill["total_cost"] }}</span>
+            </p><hr>
+            <p>
+              Staus: <span class="float-right mr-3">Paid</span>
+            </p>
+          {% endif %}
         </div>
       </div>
     </div>

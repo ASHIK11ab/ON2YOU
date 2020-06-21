@@ -151,15 +151,15 @@ def purchase_confirmation():
 @app.route('/My_Bills')
 def mybills():
     username = request.args.get('username')
-    bills, cnt , is_nested = getmybill_ids(username)
-    return render_template('mybills.html', bills = bills, cnt = cnt, username = username, is_nested = is_nested)
+    bills, cnt = getmybill_ids(username)
+    return render_template('mybills.html', bills = bills, cnt = cnt, username = username)
 
 @app.route('/My_bills/Current_Bill')
 def display_current_bill():
     bill_id = request.args.get('bill_id')
-    is_nested = request.args.get('is_nested')
-    bill = get_this_bill(bill_id)
-    return render_template('current_bill.html', bill = bill, is_nested = is_nested)
+    username = request.args.get('username')
+    bill, is_nested, total_no = get_this_bill(bill_id, username)
+    return render_template('current_bill.html', bill = bill, is_nested = is_nested, total_no = total_no)
 
 @app.route('/add_to_cart')
 def add_to_cart():

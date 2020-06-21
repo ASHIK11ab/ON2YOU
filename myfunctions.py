@@ -170,7 +170,8 @@ def generateid():
     return id
 
 def generatebill(product):
-    product["date"] = datetime.datetime.now()
+    now = datetime.datetime.now()
+    product["date"] = now.date
     flag = 0
     cnt = 0
     with open("database/id.pkl","rb") as file:
@@ -207,19 +208,39 @@ def getmybill_ids(username):
     with open("database/bill.pkl","rb") as file:
         id = []
         cnt = 0
-        is_nested = False
         while True:
             try:
                 data = pickle.load(file)
                 try:
-                    if data["1"]["customer_name"] == username:
+                    if data[1]["customer_name"] == username:
                         id.append(data["bill_id"])
                         cnt+=1
-                        is_nested = True
                 except KeyError:
                     if data["customer_name"] == username:
                         id.append(data["bill_id"])
                         cnt+=1
             except EOFError:
                 break
-    return id, cnt, is_nested
+    return id, cnt
+
+def get_this_bill(bill_id, username):
+    with open("database/bill.pkl", "rb") as file:
+        is_nested = False
+        while True:
+            try:
+                data = pickle.load(file)
+                print(data)
+                if data["bill_id"] == int(bill_id):
+                    item = data
+                    try:
+                        if data["1"]["customer_name"] == username:
+                            is_nested = True
+                            break
+                    except KeyError:
+                        break
+            except EOFError:
+                break
+    if is_nested:
+        return (item, is_nested, max(data.keys()))
+    else:
+        return (item, is_nested, 0)

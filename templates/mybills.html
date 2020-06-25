@@ -15,7 +15,7 @@
         <ol>
           {% for bill_id in bills %}
             <li>
-              <a href="{{url_for('display_current_bill', bill_id = bill_id, is_nested = is_nested, username = username)}}" target = "_blank"> #{{ bill_id }}</a>
+              <a href="{{url_for('display_current_bill', bill_id = bill_id, username = username)}}" target = "_blank"> #{{ bill_id }}</a>
             </li><hr>
           {% endfor %}
         </ol>

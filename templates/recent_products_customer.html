@@ -13,10 +13,8 @@
       </span>
     {% else %}
       <div class="alert alert-success myalert">
-        <p class="alert-header">
-          Added to cart successfully.
-          <br><small>Check your cart at <a href="#">My Cart</a></small>
-        </p>
+        <p>Added to cart successfully.</p>
+          <p><small>Check your cart at <a href="#">My Cart</a></p>
       </div>
     {% endif %}
   {% endif %}
@@ -39,15 +37,16 @@
                     <p class="pl-3" >Cost: {{ products[key]["cost"] }}</p>
                     <div class="row justify-content-around">
                       <div class="col-5">
-                        <a type="button" class="btn btn-outline-success" href="{{ url_for('purchase', product = products[key], username = username) }}">
+                        <a type="button" class="btn btn-success" href="{{ url_for('purchase', product = products[key], username = username) }}">
                           Buy Now</a>
                       </div>
                       <div class="col-5">
-                        <a type="button" class="btn btn-outline-warning" href="{{ url_for('add_to_cart', item=products[key]) }}">
+                        <a type="button" class="btn btn-warning" href="{{ url_for('cart_render_portal', product = products[key], username = username) }}">
                           Add to cart</a>
                       </div>
                     </div>
                 </div>
+                <br><br>
             {% endfor %}
           {% else %}
             {% for key in range(total, 0, -1) %}
@@ -60,11 +59,11 @@
                     <p class="pl-3" >Cost: {{ products[key]["cost"] }}</p>
                     <div class="row justify-content-around">
                       <div class="col-5">
-                        <a type="button" class="btn btn-outline-success" href="{{ url_for('purchase_tentative', item=products[key]) }}">
+                        <a type="button" class="btn btn-success" href="{{ url_for('purchase_tentative', item=products[key]) }}">
                           Buy Now</a>
                       </div>
                       <div class="col-5">
-                        <a type="button" class="btn btn-outline-warning" href="{{ url_for('add_to_cart', item=products[key]) }}">
+                        <a type="button" class="btn btn-warning" href="{{ url_for('cart_render_portal', product = products[key], username = username) }}">
                           Add to cart</a>
                       </div>
                     </div>
@@ -76,4 +75,5 @@
       </div>
     </div>
   </div>
+  <br><br>
 {% endblock %}

@@ -12,17 +12,17 @@
         <div class="form-group">
           <p>Username</p>
           <p>
-            <input type="text" name = "username" placeholder = "Enter Username" required>
+            <input type="text" name = "username" class="form-control" placeholder = "Enter Username" required>
           </p>
         </div>
         <p>Password</p>
         {% if not access_granted %}
           <p>
-          <input type="password" class="error_display" name = "password" placeholder = "Enter Password" required>
+          <input type="password" class="error_display form-control" name = "password" placeholder = "Enter Password" required>
           </p>
           <p class="text-danger">Invalid Username or Password</p>
         {% else %}
-          <input type="password" name = "password" placeholder = "Enter Password" required>
+          <input type="password" class="form-control" name = "password" placeholder = "Enter Password" required>
         {% endif %}
       </div>
       <button class = "btn btn-primary btn-block mt-2">Log in</button>

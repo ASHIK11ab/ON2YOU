@@ -1,6 +1,6 @@
 {% extends "dashboard_customer.html" %} {% block title %} Product Purchase {%
 endblock %} {% block body %}
-<div class="container mt-5 col-sm-7 col-md-4">
+<div class="col-sm-7 login col-md-5 mt-3">
   <div class="card">
     <div class="card-content pl-3">
       <p>Item name: {{ product["item_name"] }}</p>
@@ -8,7 +8,7 @@ endblock %} {% block body %}
       <p>Category: {{ product["category"] }}</p>
       <p>Cost: {{ product["cost"] }}</p>
       <form
-        action="{{url_for('purchase_tentative', product = product, username = username)}}"
+        action="{{url_for('add_to_cart', product = product, username = username)}}"
         method="post"
       >
         <div class="form-group row justify-content-between">
@@ -18,21 +18,21 @@ endblock %} {% block body %}
           <div class="col-6">
             <input
               type="number"
-              name="quantity"
               class="form-control"
+              name="quantity"
               placeholder="Quantity"
             />
           </div>
         </div>
-        <div class="row">
-          <div class="col-8">
+        <div class="row justify-content-around">
+          <div class="col-7">
             <button type="submit" class="btn btn-primary btn-block">
-              Procced to Purchase.
+              Add to cart
             </button>
           </div>
           <div class="col-4">
             <a
-              href="{{ url_for('recent_products_customer', username = username, is_message = 'False' )}}  "
+              href="{{ url_for('recent_products_customer', username = username, is_message = 'False', message = 'None' )}}"
               class="btn btn-warning btn-block"
             >
               Cancel.

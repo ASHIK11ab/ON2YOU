@@ -1,29 +1,32 @@
-{% extends "dashboard_customer.html" %}
-
-{% block title %}
-  Product Purchase
-{% endblock %}
-
-{% block body %}
-  <div class="col-sm-7 col-md-5 mt-3">
-    <div class="card">
-      <div class="card-content pl-3">
-        <p>Item name: {{ product["item_name"] }}</p>
-        <p>Seller name: {{ product["seller_name"] }}</p>
-        <p>Category: {{ product["category"] }}</p>
-        <p>Cost: {{ product["cost"] }}</p>
-        <p>Enter Quantity: {{ product["quantity"] }}</p>
-        <p>Total Cost: {{ product["total_cost"] }}</p>
-          <div class="row justify-content-around">
-            <div class="col-5">
-              <a type = "submit" href="{{ url_for('purchase_confirmation', product = product , username = username )}}  " class ="btn btn-primary btn-block">Purchase.</a>
-            </div>
-            <div class="col-5">
-              <a href="{{ url_for('recent_products_customer', username = username )}}  " class ="btn btn-warning btn-block">Cancel.</a>
-            </div>
-          </div>
-        </form>
+{% extends "dashboard_customer.html" %} {% block title %} Product Purchase {%
+endblock %} {% block body %}
+<div class="col-sm-7 login col-md-5 mt-3">
+  <div class="card">
+    <div class="card-content pl-3">
+      <p>Item name: {{ product["item_name"] }}</p>
+      <p>Seller name: {{ product["seller_name"] }}</p>
+      <p>Category: {{ product["category"] }}</p>
+      <p>Cost: {{ product["cost"] }}</p>
+      <p>Enter Quantity: {{ product["quantity"] }}</p>
+      <p>Total Cost: {{ product["total_cost"] }}</p>
+      <div class="row justify-content-around">
+        <div class="col-5">
+          <a
+            type="submit"
+            href="{{ url_for('purchase_confirmation', product = product , mode = 'buy', product_cnt = 1, username = username )}}  "
+            class="btn btn-primary btn-block"
+            >Purchase.</a
+          >
+        </div>
+        <div class="col-5">
+          <a
+            href="{{ url_for('recent_products_customer', username = username )}}  "
+            class="btn btn-warning btn-block"
+            >Cancel.</a
+          >
+        </div>
       </div>
     </div>
   </div>
+</div>
 {% endblock%}

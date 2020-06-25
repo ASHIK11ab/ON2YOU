@@ -1,38 +1,46 @@
-{% extends "dashboard_seller.html" %}
-
-{% block title %}
-  Add Item
-{% endblock %}
-
-{% block body %}
-  {% if is_success %}
-    <span class="alert alert-success myalert">
-      Item added successfully.
-    </span>
-  {% endif %}
-  <div class="login col-sm-7 col-md-5">
-    <h3 class="text-center mt-3">Add Item</h3><br><hr>
-    <form action="{{ url_for('add_item', username = username) }}" method = "post">
-      <div class="form-group">
-        <p>Item Name:</p>
-        <input type="text" name = "item_name" placeholder = "Enter Item Name" required>
+{% extends "dashboard_seller.html" %} {% block title %} Add Item {% endblock %}
+{% block body %} {% if is_success %}
+<span class="alert alert-success myalert">
+  Item added successfully.
+</span>
+{% endif %}
+<div class="login col-sm-7 col-md-5">
+  <h3 class="text-center mt-3">Add Item</h3>
+  <br />
+  <hr />
+  <form action="{{ url_for('add_item', username = username) }}" method="post">
+    <div class="form-group">
+      <p>Item Name:</p>
+      <input
+        type="text"
+        name="item_name"
+        placeholder="Enter Item Name"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <p>Category:</p>
+      <input
+        type="text"
+        name="category"
+        placeholder="Enter category"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <p>Cost:</p>
+      <input type="text" name="cost" placeholder="Enter cost" required />
+    </div>
+    <div class="row justify-content-around">
+      <div class="col-5">
+        <button type="submit" class="btn btn-block btn-primary">
+          Add item
+        </button>
       </div>
-      <div class="form-group">
-        <p>Category:</p>
-        <input type="text" name = "category" placeholder = "Enter category" required>
+      <div class="col-5">
+        <button type="reset" class="btn btn-block btn-warning">Reset</button>
       </div>
-      <div class="form-group">
-        <p>Cost:</p>
-        <input type="text" name = "cost" placeholder = "Enter cost" required>
-      </div>
-      <div class="row justify-content-around">
-        <div class="col-5">
-          <button type="submit" class="btn btn-block btn-primary">Add item</button>
-        </div>
-        <div class="col-5">
-          <button type="reset" class="btn btn-block btn-warning">Reset</button>
-        </div>
-      </div>
-    </form>
-  </div>
+    </div>
+  </form>
+</div>
 {% endblock %}

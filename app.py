@@ -146,7 +146,7 @@ def purchase_tentative():
     username = request.args.get('username')
     product = request.args.get('product')
     qty = request.form.get('quantity')
-    if qty == "":
+    if qty == "" or qty == '0':
         qty = 1
     e = NativeEnvironment()
     t = e.from_string(product)
@@ -209,7 +209,7 @@ def add_to_cart():
     username = request.args.get('username')
     product = request.args.get('product')
     qty = request.form.get('quantity')
-    if qty == "":
+    if qty == "" or qty == '0':
         qty = 1
     e = NativeEnvironment()
     t = e.from_string(product)
@@ -226,3 +226,26 @@ def my_cart():
     username = request.args.get('username')
     products, cnt, cart_cost = my_items_in_cart(username)
     return render_template('mycart.html', products=products, cnt=cnt, username=username, cart_cost=cart_cost)
+
+@app.route('/product_search', methods = ['GET', 'POST'])
+def product_search():
+    username = request.args.get('username')
+    if request.method == 'GET':
+        return render_template('product_search.html', username = username)
+    
+    query = request.form.get('query')
+    if query != '':
+        results, cnt = find_products(query)
+    else:
+        cnt = 0
+        results = {}
+    return render_template('search_results.html', results = results, cnt = cnt, query = query, username = username)
+
+
+
+
+
+
+
+
+

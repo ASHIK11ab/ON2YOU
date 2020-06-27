@@ -1,0 +1,37 @@
+{% extends "dashboard_customer.html" %}
+
+{% block body %}
+  <div class="container">
+    <form action=" {{ url_for('product_search', username = username) }} " method = "post">
+      <div class="input-group mb-3 mt-3">
+        <input type="text" class="form-control" name="query" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <button class="input-group-text bg-success text-white" id="basic-addon2">search</button>
+        </div>
+      </div>
+    </form>
+  <div class="card">
+    <div class="card-header">
+      <p class ="h2"> {{ cnt }} search results for  '{{ query }}' </p>
+    </div>
+    {% if cnt > 0 %}
+      <div class="card-content mt-3 px-3">
+        {% for key in range(1,cnt+1) %}
+            <div class="card-header bg-dark text-white row">
+              <div class="col">
+                <p class ="h2">Item Name: {{ results[key]["item_name"] }}</p>
+              </div>
+              <div class="col float-right mr-2">
+                <a class="btn btn-primary" href="{{ url_for('purchase', product = results[key], username = username) }}">Buy Now</a>
+                <a class="btn btn-warning ml-lg-3" href="{{ url_for('cart_render_portal', product = results[key], username = username) }}">Add to Cart</a>
+              </div>
+            </div>
+            <p class="mt-2">Seller name: {{ results[key]["seller_name"] }}</p>
+            <p>Category: {{ results[key]["category"] }}</p>
+            <p>Cost: {{ results[key]["cost"] }}</p><hr>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

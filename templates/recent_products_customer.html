@@ -14,7 +14,7 @@
     {% else %}
       <div class="alert alert-success myalert">
         <p>Added to cart successfully.</p>
-          <p><small>Check your cart at <a href="#">My Cart</a></p>
+          <p><small>Check your cart at <a href=" {{ url_for('my_cart', username = username) }} ">My Cart</a></p>
       </div>
     {% endif %}
   {% endif %}

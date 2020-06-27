@@ -26,7 +26,7 @@
         </div>
         <div class="card-content pre-scrollable pl-3">
           {% if bill["mode"] == 'cart' %}
-            <p>
+            <p class="mt-2">
               Customer Name:
               <span class="float-right mr-3">{{ bill["customer_name"] }}</span>
             </p>
@@ -40,7 +40,7 @@
                   <span class="float-right mr-3">{{ bill[key]["item_name"] }}</span>
                 </p>
               </div><hr />
-              <p>
+              <p class="mt-2">
                 Seller Name:
                 <span class="float-right mr-3">{{ bill[key]["seller_name"] }}</span>
               </p>
@@ -75,21 +75,21 @@
             <p>Staus: <span class="float-right mr-3">Paid</span></p>
 
           {% else %}
-            <p>
+            <p class="mt-2">
               Customer Name:
               <span class="float-right mr-3">{{ bill["customer_name"] }}</span>
             </p>
             <hr />
             <p>Date: <span class="float-right mr-3">{{ bill["date"] }}</span></p>
             <hr />
-            <div class="card-header">
+            <div class="card-header bg-dark text-white">
               <p>
                 Item Name:
                 <span class="float-right mr-3">{{ bill["item_name"] }}</span>
               </p>
               <hr />
             </div>
-            <p>
+            <p class="mt-2">
               Seller Name:
               <span class="float-right mr-3">{{ bill["seller_name"] }}</span>
             </p>

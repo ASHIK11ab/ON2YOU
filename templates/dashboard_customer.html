@@ -18,7 +18,7 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-item nav-link active" href="{{ url_for('recent_products_customer', username = username, is_message=False, message ='none') }}">Dashboard<span class="sr-only">(current)</span></a>
-          <a class="nav-item nav-link active" href="#">Search <span class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link active" href=" {{ url_for('product_search', username = username) }} ">Search <span class="sr-only">(current)</span></a>
           <a class="nav-item nav-link active" href="{{ url_for('my_cart', username = username) }}">My Cart</a>
             <!-- Default dropright button -->
             <div class=" mt-2 pl-md-2 dropdown">

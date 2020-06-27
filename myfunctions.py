@@ -284,3 +284,31 @@ def my_items_in_cart(username):
             except EOFError:
                 break
     return (results, cnt, cost)
+
+
+def find_products(query):
+    cnt = 0
+    results = {}
+    obj = products()
+    with open('database/products.pkl', 'rb') as file:
+        while True:
+            try:
+                obj = pickle.load(file)
+                if query in obj.getitem_name():
+                    subresults = {}
+                    cnt += 1
+                    subresults["seller_name"] = obj.getusername()
+                    subresults["item_name"] = obj.getitem_name()
+                    subresults["category"] = obj.getcategory()
+                    subresults["cost"] = obj.getcost()
+                    results[cnt] = subresults
+            except EOFError:
+                break
+    return (results, cnt)
+
+
+
+
+
+
+

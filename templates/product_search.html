@@ -1,0 +1,16 @@
+{% extends "dashboard_customer.html" %}
+
+{% block title %} Product Search {% endblock %}
+
+{% block body %}
+  <div class="container">
+    <form action=" {{ url_for('product_search', username = username) }} " method = "post">
+      <div class="input-group mb-3 mt-3">
+        <input type="text" class="form-control" name="query" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <button class="input-group-text bg-success text-white" id="basic-addon2">search</button>
+        </div>
+      </div>
+    </form>
+  </div>
+{% endblock %}

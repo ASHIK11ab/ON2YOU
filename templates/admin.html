@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/style.css') }}">
+    <title>Admin</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link active" href="{{ url_for('admin', username = username) }}">Admin<span class="sr-only">(current)</span></a>
+            <!-- Default dropright button -->
+            <div class=" mt-2 pl-md-2 dropdown">
+              <a  class=" dropdown-toggle cursor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                My Account
+              </a>
+              <div class="dropdown-menu ">
+                <!-- Dropdown menu links -->
+                <div>
+                  <a  class="dropdown-item" href="#">Username: {{ username }}</a>
+                  <hr><a class="dropdown-item" href="{{ url_for('index') }}">Logout</a>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </nav>
+    <div class="container mt-3">
+      <div class="row justify-content-around">
+        <div class="col-md-2 mt-2 col-sm-5 text-center h3 pt-3 pb-3 bg-primary">
+          <a class="text-decoration-none text-white" href="{{ url_for('all_sellers', username = username, sellers = sellers, s_cnt = s_cnt, c_cnt = c_cnt, b_cnt = b_cnt, p_cnt = p_cnt) }}">
+            <p>Total no of sellers:</p>
+            <p class="text-center"> {{s_cnt}} </p>
+          </a>
+        </div>
+        <div class="col-md-2 mt-2 col-sm-5 bg-warning text-center h3 pt-3 pb-3">
+          <a class="text-decoration-none text-white" href="{{ url_for('all_customers', username = username, customers = customers, s_cnt = s_cnt, c_cnt = c_cnt, b_cnt = b_cnt, p_cnt = p_cnt) }}">
+            <p>Total no of customers:</p>
+            <p class="text-center"> {{c_cnt}} </p>
+          </a>
+        </div>
+        <div class="col-md-2 mt-2 col-sm-5 text-center h3 pt-3 pb-3 bg-info">
+          <a class="text-decoration-none text-white" href="{{ url_for('all_products_admin', username = username, products = products, s_cnt = s_cnt, c_cnt = c_cnt, b_cnt = b_cnt, p_cnt = p_cnt) }}">
+            <p>Total no of products:</p>
+            <p class="text-center"> {{p_cnt}} </p>
+          </a>
+        </div>
+        <div class="col-md-2 mt-2 col-sm-5 text-center h3 pt-3 pb-3 bg-success">
+          <a class="text-decoration-none text-white" href="{{ url_for('all_bills', username = username, bill_ids = bill_ids, s_cnt = s_cnt, c_cnt = c_cnt, b_cnt = b_cnt, p_cnt = p_cnt) }}">
+            <p>Total no of bills:</p>
+            <p> {{b_cnt}} </p>
+          </a>
+        </div>
+      </div>
+    </div>
+    {% block body %}
+    {% endblock %}
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+{% extends "admin.html" %}
+
+{% block body %}
+  <div class="container mt-5">
+    {% if s_cnt|int() > 0 %}
+        <table>
+          <tr>
+            <th>S.No</th>
+            <th>Seller Name</th>
+            <th>Password</th>
+          </tr>
+          {% for key in range(1, s_cnt|int() +1) %}
+            <tr>
+              <td> {{ key }} </td>
+              <td> {{ sellers[key]["seller_name"] }}</td>
+              <td> {{ sellers[key]["password"] }}</td>
+            </tr>
+          {% endfor %}
+        </table>
+    {% else %}
+        <h2>No Sellers until now</h2>
+    {% endif %}
+  </div>
+{% endblock %}

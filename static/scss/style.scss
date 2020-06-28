@@ -17,6 +17,19 @@ p{
   font-size:18px;
 }
 
+table{
+  border: 1px solid black;
+  border-collapse: collapse;
+  th{
+    text-align: center;
+    padding: 10px;
+  }
+  td{
+    padding: 10px;
+  }
+
+}
+
 .error_display{
   border: 1px solid red;
 }

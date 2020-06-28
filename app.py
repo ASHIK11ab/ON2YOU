@@ -29,6 +29,8 @@ def sellerlogin():
     password = request.form.get("password")
     access_granted = existingseller(username, password)
     if access_granted:
+        if username == "admin":
+            return redirect(url_for('admin', username = username))
         return redirect(url_for('recent_product', username=username, register=False))
     else:
         return render_template('sellerlogin.html', access_granted=access_granted)
@@ -138,7 +140,7 @@ def purchase():
     t = e.from_string(product)
     product = t.render()
     username = request.args.get('username')
-    return render_template('purchase.html', product=product, username=username)
+    return render_template('purchase.html', product=product, error = False, username=username)
 
 
 @app.route('/Purchase/Purchase_tentative', methods=["POST"])
@@ -146,8 +148,10 @@ def purchase_tentative():
     username = request.args.get('username')
     product = request.args.get('product')
     qty = request.form.get('quantity')
-    if qty == "" or qty == '0':
+    if qty == "":
         qty = 1
+    if qty == '0':
+        return render_template('purchase.html', username = username, product = product, error = True)
     e = NativeEnvironment()
     t = e.from_string(product)
     product = t.render()
@@ -201,7 +205,7 @@ def cart_render_portal():
     t = e.from_string(product)
     product = t.render()
     username = request.args.get('username')
-    return render_template('cart.html', product=product, username=username)
+    return render_template('cart.html', product=product, username=username, error = False)
 
 
 @app.route('/add_to_cart', methods=["POST"])
@@ -209,8 +213,10 @@ def add_to_cart():
     username = request.args.get('username')
     product = request.args.get('product')
     qty = request.form.get('quantity')
-    if qty == "" or qty == '0':
+    if qty == "":
         qty = 1
+    if qty == '0':
+        return render_template('cart.html', product=product, username=username, error = True)
     e = NativeEnvironment()
     t = e.from_string(product)
     product = t.render()
@@ -227,6 +233,12 @@ def my_cart():
     products, cnt, cart_cost = my_items_in_cart(username)
     return render_template('mycart.html', products=products, cnt=cnt, username=username, cart_cost=cart_cost)
 
+@app.route('/My_Cart/Empty_Cart')
+def empty_cart():
+    username = request.args.get('username')
+    emptycart(username)
+    return render_template('mycart.html', cnt=0, username = username)
+
 @app.route('/product_search', methods = ['GET', 'POST'])
 def product_search():
     username = request.args.get('username')
@@ -240,6 +252,64 @@ def product_search():
         cnt = 0
         results = {}
     return render_template('search_results.html', results = results, cnt = cnt, query = query, username = username)
+
+@app.route('/Admin')
+def admin():
+    username = request.args.get('username')
+    sellers, s_cnt = allsellers()
+    customers, c_cnt = allcustomers()
+    bill_ids, b_cnt = allbills()
+    products, p_cnt = recent_products_find()
+    return render_template('admin.html',username = username, sellers = sellers, s_cnt = s_cnt, customers = customers, c_cnt = c_cnt, bill_ids = bill_ids, b_cnt = b_cnt, products = products, p_cnt = p_cnt )
+
+@app.route('/Admin/all_seller')
+def all_sellers():
+    username = request.args.get('username')
+    sellers = request.args.get('sellers')
+    e = NativeEnvironment()
+    t = e.from_string(sellers)
+    sellers = t.render()
+    p_cnt = request.args.get('p_cnt')
+    s_cnt = request.args.get('s_cnt')
+    c_cnt = request.args.get('c_cnt')
+    b_cnt = request.args.get('b_cnt')
+    return render_template('allsellers.html', sellers = sellers, s_cnt = s_cnt, c_cnt = c_cnt, b_cnt = b_cnt, p_cnt = p_cnt,  username = username)
+
+@app.route('/Admin/all_customer')
+def all_customers():
+    username = request.args.get('username')
+    customers = request.args.get('customers')
+    e = NativeEnvironment()
+    t = e.from_string(customers)
+    customers = t.render()
+    p_cnt = request.args.get('p_cnt')
+    s_cnt = request.args.get('s_cnt')
+    c_cnt = request.args.get('c_cnt')
+    b_cnt = request.args.get('b_cnt')
+    return render_template('allcustomers.html', customers = customers, s_cnt = s_cnt,  c_cnt = c_cnt, b_cnt = b_cnt, p_cnt = p_cnt, username = username)
+
+@app.route('/Admin/all_bills')
+def all_bills():
+    username = request.args.get('username')
+    bill_ids = request.args.get('bill_ids')
+    p_cnt = request.args.get('p_cnt')
+    s_cnt = request.args.get('s_cnt')
+    c_cnt = request.args.get('c_cnt')
+    b_cnt = request.args.get('b_cnt')
+    return render_template('allbills.html', bill_ids = bill_ids, s_cnt = s_cnt, c_cnt = c_cnt, b_cnt = b_cnt, p_cnt = p_cnt, username = username)
+
+@app.route('/Admin/all_products')
+def all_products_admin():
+    username = request.args.get('username')
+    products = request.args.get('products')
+    p_cnt = request.args.get('p_cnt')
+    s_cnt = request.args.get('s_cnt')
+    c_cnt = request.args.get('c_cnt')
+    b_cnt = request.args.get('b_cnt')
+    return render_template('allprdoucts.html', products = products, s_cnt = s_cnt, c_cnt = c_cnt, b_cnt = b_cnt, p_cnt = p_cnt, username = username)
+
+
+
 
 
 

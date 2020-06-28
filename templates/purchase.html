@@ -16,12 +16,12 @@ endblock %} {% block body %}
             <p>Enter Quantity:</p>
           </div>
           <div class="col-6">
-            <input
-              type="number"
-              name="quantity"
-              class="form-control"
-              placeholder="Quantity"
-            />
+            {% if error == True %}
+              <input type="number" name="quantity" class="form-control error_display" placeholder="Quantity"/>
+              <p class="text-danger">Enter a valid input</p>
+            {% else %}
+              <input type="number" name="quantity" class="form-control " placeholder="Quantity"/>
+            {% endif %}
           </div>
         </div>
         <div class="row">

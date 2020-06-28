@@ -12,12 +12,12 @@
         <p>Username</p>
         {% if not is_new_user %}
           <p>
-            <input type="text" class="error_display" name = "username" placeholder = "Enter Username" required>
+            <input type="text" class="error_display form-control" name = "username" placeholder = "Enter Username" required>
           </p>
           <p class="text-danger">Username aldready exists.</p>
         {% else %}
           <p>
-            <input type="text" name = "username" placeholder = "Enter Username" required>
+            <input type="text" name = "username" class="form-control" placeholder = "Enter Username" required>
           </p>
         {% endif %}
       </div>
@@ -25,24 +25,24 @@
         {% if not password_match  %}
           <p>Password</p>
           <p>
-          <input type="password" class="error_display" name = "password" placeholder = "Enter Password" required>
+          <input type="password" class="error_display form-control" name = "password" placeholder = "Enter Password" required>
           </p>
           <div class="form-group">
             <p>Confirm Password</p>
             <p>
-              <input type="password" class="error_display" name="confirm_password" placeholder="Confirm password">
+              <input type="password" class="error_display form-control" name="confirm_password" placeholder="Confirm password">
             </p>
           </div>
           <p class="text-danger">Passwords dont match.</p>
         {% else %}
           <p>Password</p>
           <p>
-          <input type="password" name = "password" placeholder = "Enter Password" required>
+          <input type="password" name = "password" class="form-control" placeholder = "Enter Password" required>
           </p>
           <div class="form-group">
             <p>Confirm Password</p>
             <p>
-              <input type="password" name="confirm_password" placeholder="Confirm password">
+              <input type="password" name="confirm_password" class="form-control" placeholder="Confirm password">
             </p>
           </div>
         {% endif %}

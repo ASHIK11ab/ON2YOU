@@ -21,9 +21,9 @@
               <div class="col">
                 <p class ="h2">Item Name: {{ results[key]["item_name"] }}</p>
               </div>
-              <div class="col float-right mr-2">
-                <a class="btn btn-primary" href="{{ url_for('purchase', product = results[key], username = username) }}">Buy Now</a>
-                <a class="btn btn-warning ml-lg-3" href="{{ url_for('cart_render_portal', product = results[key], username = username) }}">Add to Cart</a>
+              <div class="col ml-sm-5 float-right mr-2">
+                <a class="btn btn-primary mt-1" href="{{ url_for('purchase', product = results[key], username = username) }}">Buy Now</a>
+                <a class="btn btn-warning ml-lg-3 mt-1" href="{{ url_for('cart_render_portal', product = results[key], username = username) }}">Add to Cart</a>
               </div>
             </div>
             <p class="mt-2">Seller name: {{ results[key]["seller_name"] }}</p>

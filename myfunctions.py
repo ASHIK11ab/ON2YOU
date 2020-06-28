@@ -307,7 +307,67 @@ def find_products(query):
     return (results, cnt)
 
 
+def emptycart(username):
+    with open('database/cart.pkl', "rb") as source:
+            with open('database/temporary.pkl', "wb") as destination:
+                while True:
+                    try: 
+                        data = pickle.load(source)
+                        if data["customer_name"] != username:
+                            pickle.dump(data, destination)
+                    except EOFError:
+                        break
+    os.chdir('database')
+    os.remove('cart.pkl')
+    os.rename('temporary.pkl','cart.pkl')
+    os.chdir('../')    
 
+def allsellers():
+    obj = seller()
+    cnt = 0
+    results = {}
+    with open('database/seller.pkl', 'rb') as file:
+        while True:
+            try:
+                subresults = {}
+                obj = pickle.load(file)
+                subresults["seller_name"] = obj.getusername()
+                subresults["password"] = obj.getpassword()
+                cnt+= 1
+                results[cnt] = subresults
+            except EOFError:
+                break
+    return (results, cnt)
+
+def allcustomers():
+    obj = customer()
+    cnt = 0
+    results = {}
+    with open('database/customer.pkl', 'rb') as file:
+        while True:
+            try:
+                subresults = {}
+                obj = pickle.load(file)
+                subresults["seller_name"] = obj.getusername()
+                subresults["password"] = obj.getpassword()
+                cnt+= 1
+                results[cnt] = subresults
+            except EOFError:
+                break
+    return (results, cnt)
+
+def allbills():
+    with open("database/bill.pkl", "rb") as file:
+        id = []
+        cnt = 0
+        while True:
+            try:
+                data = pickle.load(file)
+                id.append(data["bill_id"])
+                cnt += 1
+            except EOFError:
+                break
+    return (id, cnt )
 
 
 

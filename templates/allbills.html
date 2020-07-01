@@ -3,19 +3,19 @@
 {% block body %}
   <div class="container mt-5">
     {% if b_cnt|int() > 0 %}
-        <table>
+        <table align="center">
           <tr>
             <th>S.No</th>
            <th>Bill No</th>
           </tr>
-          {% for key in range(1, len(bill_ids)+1 ) %}
+          {% for key in range(1, bill_ids|length ) %}
             <tr>
               <td> {{ key }} </td>
-              <td> </td><a href="{{url_for('display_current_bill', bill_id = bill_ids[key], username = username)}}" target = "_blank">
+              <td><a href="{{url_for('display_current_bill', bill_id = bill_ids[key], username = username)}}" target = "_blank">
                  {{ bill_ids[key] }} </a> </td>
             </tr>
           {% endfor %}
-        </table>
+        </table><br>
     {% else %}
         <h2>No Bills until now</h2>
     {% endif %}

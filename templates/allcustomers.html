@@ -3,7 +3,7 @@
 {% block body %}
   <div class="container mt-5">
     {% if c_cnt|int() > 0 %}
-        <table>
+        <table align="center">
           <tr>
             <th>S.No</th>
            <th>Customer Name</th>
@@ -16,7 +16,7 @@
               <td> {{ customers[key]["password"] }}</td>
             </tr>
           {% endfor %}
-        </table>
+        </table><br>
     {% else %}
         <h2>No Customers until now</h2>
     {% endif %}

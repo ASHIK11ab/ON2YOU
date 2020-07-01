@@ -36,26 +36,26 @@
     </nav>
     <div class="container mt-3">
       <div class="row justify-content-around">
-        <div class="col-md-2 mt-2 col-sm-5 text-center h3 pt-3 pb-3 bg-primary">
-          <a class="text-decoration-none text-white" href="{{ url_for('all_sellers', username = username, sellers = sellers, s_cnt = s_cnt, c_cnt = c_cnt, b_cnt = b_cnt, p_cnt = p_cnt) }}">
+        <div class="col-md-2 mt-2 col-sm-5 text-center h2 pt-3 pb-3 bg-primary">
+          <a class="text-decoration-none text-white" href="{{ url_for('all_sellers', username = username, s_cnt = s_cnt, c_cnt = c_cnt, b_cnt = b_cnt, p_cnt = p_cnt) }}">
             <p>Total no of sellers:</p>
             <p class="text-center"> {{s_cnt}} </p>
           </a>
         </div>
-        <div class="col-md-2 mt-2 col-sm-5 bg-warning text-center h3 pt-3 pb-3">
-          <a class="text-decoration-none text-white" href="{{ url_for('all_customers', username = username, customers = customers, s_cnt = s_cnt, c_cnt = c_cnt, b_cnt = b_cnt, p_cnt = p_cnt) }}">
+        <div class="col-md-2 mt-2 col-sm-5 bg-warning text-center h2 pt-3 pb-3">
+          <a class="text-decoration-none text-white" href="{{ url_for('all_customers', username = username, s_cnt = s_cnt, c_cnt = c_cnt, b_cnt = b_cnt, p_cnt = p_cnt) }}">
             <p>Total no of customers:</p>
             <p class="text-center"> {{c_cnt}} </p>
           </a>
         </div>
-        <div class="col-md-2 mt-2 col-sm-5 text-center h3 pt-3 pb-3 bg-info">
-          <a class="text-decoration-none text-white" href="{{ url_for('all_products_admin', username = username, products = products, s_cnt = s_cnt, c_cnt = c_cnt, b_cnt = b_cnt, p_cnt = p_cnt) }}">
+        <div class="col-md-2 mt-2 col-sm-5 text-center h2 pt-3 pb-3 " id = "three">
+          <a class="text-decoration-none text-white" href="{{ url_for('all_products_admin', username = username, s_cnt = s_cnt, c_cnt = c_cnt, b_cnt = b_cnt, p_cnt = p_cnt) }}">
             <p>Total no of products:</p>
             <p class="text-center"> {{p_cnt}} </p>
           </a>
         </div>
-        <div class="col-md-2 mt-2 col-sm-5 text-center h3 pt-3 pb-3 bg-success">
-          <a class="text-decoration-none text-white" href="{{ url_for('all_bills', username = username, bill_ids = bill_ids, s_cnt = s_cnt, c_cnt = c_cnt, b_cnt = b_cnt, p_cnt = p_cnt) }}">
+        <div class="col-md-2 mt-2 col-sm-5 text-center h2 pt-3 pb-3 bg-success">
+          <a class="text-decoration-none text-white" href="{{ url_for('all_bills', username = username, s_cnt = s_cnt, c_cnt = c_cnt, b_cnt = b_cnt, p_cnt = p_cnt) }}">
             <p>Total no of bills:</p>
             <p> {{b_cnt}} </p>
           </a>

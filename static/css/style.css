@@ -14,14 +14,22 @@ input {
 p {
   font-size: 18px; }
 
+#three {
+  background-color: #6200ea; }
+
 table {
   border: 1px solid black;
-  border-collapse: collapse; }
+  border-collapse: collapse;
+  text-align: center; }
   table th {
     text-align: center;
-    padding: 10px; }
+    padding: 10px;
+    border: 1px solid black;
+    font-size: 20px; }
   table td {
-    padding: 10px; }
+    padding: 10px;
+    border: 1px solid black;
+    font-size: 20px; }
 
 .error_display {
   border: 1px solid red; }

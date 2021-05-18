@@ -28,7 +28,7 @@
 
 [Ashik Meeran Mohideen](https://github.com/ASHIK11ab)
 
-&copy; copyrights 2020. All rights reserved.
+&copy; copyrights 2021. All rights reserved.
 
-Licensed under [MIT LICENSE](https://github.com/ASHIK11ab/Library-management-system-using-C-plus-plus/blob/master/LICENSE)
+Licensed under [MIT LICENSE](https://github.com/ASHIK11ab/ON2YOU/blob/master/LICENSE)
 
